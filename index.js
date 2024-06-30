@@ -19,11 +19,11 @@ app.use(cookieParser())
 
 // Middleware para manejar sesiones
 app.use(
-  session({
-    secret: 'your_secret_key', // Clave secreta para firmar la sesión
-    resave: false, // No volver a guardar la sesión si no ha sido modificada
-    saveUninitialized: true, // Guardar una sesión no inicializada
-  })
+ session({
+  secret: 'your_secret_key', // Clave secreta para firmar la sesión
+  resave: false, // No volver a guardar la sesión si no ha sido modificada
+  saveUninitialized: true // Guardar una sesión no inicializada
+ })
 )
 
 // Middleware para permitir otros métodos HTTP como PUT y DELETE usando un campo oculto "_method"
@@ -34,15 +34,23 @@ let tareas = [] // base de datos de tareas simulada
 
 // Ruta para mostrar el formulario de registro
 app.get('/register', (req, res) => {
-  res.render('register')
+ res.render('register')
 })
 
 // Ruta para manejar el registro de usuarios
-app.post('/register', (req, res) => {})
+app.post('/register', (req, res) => {
+ // Verificar que el nombre de usuario no esté en uso
+ const { username, password } = req.body
+
+ usuarios.push({ username, password })
+ console.log(usuarios)
+ //una vez que este registrago rendizar login
+ res.redirect('/login')
+})
 
 // Ruta para mostrar el formulario de inicio de sesión
 app.get('/login', (req, res) => {
-  res.render('login')
+ res.render('login')
 })
 
 // Ruta para manejar el inicio de sesión de usuarios
@@ -53,7 +61,7 @@ app.post('/logout', (req, res) => {})
 
 // Ruta para mostrar las tareas (solo si el usuario está autenticado)
 app.get('/tareas', (req, res) => {
-  res.render('tareas', { tareas }) // Si el usuario está autenticado
+ res.render('tareas', { tareas }) // Si el usuario está autenticado
 })
 
 // Ruta para manejar la creación de nuevas tareas (solo si el usuario está autenticado)
@@ -63,9 +71,9 @@ app.post('/tareas', (req, res) => {})
 app.delete('/tareas/:id', (req, res) => {})
 
 app.use((req, res) => {
-  res.render('404')
+ res.render('404')
 })
 
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}/register`)
+ console.log(`Server is running on http://localhost:${PORT}/register`)
 })

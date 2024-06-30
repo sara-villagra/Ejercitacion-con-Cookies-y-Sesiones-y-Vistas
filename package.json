@@ -1,7 +1,7 @@
 {
-  "name": "Lista de Tareas con JWT y Cookies",
+  "name": "ejercitacion-con-cookies-y-sesiones-y-vistas",
   "version": "1.0.0",
-  "description": "",
+  "description": "En esta ejercitación, vas a desarrollar una aplicación web de gestión de tareas utilizando Node.js, Express y EJS. Se te proporcionan los archivos de vistas en formato `.ejs` y un archivo `index.js` con la configuración inicial del servidor. Tu objetivo será completar el archivo `index.js` para que la aplicación funcione correctamente.",
   "main": "index.js",
   "scripts": {
     "start": "node --watch index.js",
@@ -11,11 +11,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.20.2",
-    "cookie-parser": "^1.4.6",
-    "ejs": "^3.1.10",
-    "express": "^4.19.2",
-    "express-session": "^1.18.0",
-    "method-override": "^3.0.0"
+    "body-parser": "1.20.2",
+    "cookie-parser": "1.4.6",
+    "ejs": "3.1.10",
+    "express": "4.19.2",
+    "express-session": "1.18.0",
+    "method-override": "3.0.0"
   }
 }
