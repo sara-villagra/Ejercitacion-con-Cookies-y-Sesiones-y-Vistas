@@ -95,7 +95,7 @@ app.post('/login', (req, res) => {
 // Ruta para manejar el cierre de sesión de usuarios
 app.post('/logout', (req, res) => {
  req.session.destroy()
- res.send('Usuario deslogueado')
+ res.render('login')
 })
 
 // Ruta para mostrar las tareas (solo si el usuario está autenticado)
@@ -117,7 +117,15 @@ app.post('/tareas', authenticateUser, (req, res) => {
 })
 
 // Ruta para manejar la eliminación de tareas (solo si el usuario está autenticado)
-app.delete('/tareas/:id', (req, res) => {})
+app.delete('/tareas/:id', authenticateUser, (req, res) => {
+ // Buscar la tarea por ID y eliminarla de la base de datos
+ const id = parseInt(req.params.id)
+ const index = tareas.findIndex((tarea) => tarea.id === id)
+ if (index !== -1) {
+  tareas.splice(index, 1)
+ }
+ res.render('tareas', { tareas })
+})
 
 app.use((req, res) => {
  res.render('404')
